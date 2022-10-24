@@ -4,8 +4,10 @@
 
 ```ts
 
-// @public (undocumented)
-export function getVersion(): string;
+import { CustomLayerInterface } from 'mapbox-gl';
+
+// @alpha
+export function createGeoCircleLayer(): CustomLayerInterface;
 
 // (No @packageDocumentation comment for this package)
 

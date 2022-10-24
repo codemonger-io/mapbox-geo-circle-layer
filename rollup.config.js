@@ -7,5 +7,6 @@ export default {
     dir: 'dist',
     sourcemap: true,
   },
+  external: ['mapbox-gl'],
   plugins: [typescript()],
 };
