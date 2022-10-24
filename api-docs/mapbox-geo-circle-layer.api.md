@@ -5,10 +5,21 @@
 ```ts
 
 import { CustomLayerInterface } from 'mapbox-gl';
+import { Map as Map_2 } from 'mapbox-gl';
 
 // @alpha
-export function createGeoCircleLayer(): CustomLayerInterface;
-
-// (No @packageDocumentation comment for this package)
+export class GeoCircleLayer implements CustomLayerInterface {
+    constructor();
+    // Warning: (ae-forgotten-export) The symbol "LngLat" needs to be exported by the entry point index.d.ts
+    center: LngLat;
+    id: string;
+    numTriangles: number;
+    // (undocumented)
+    onAdd(map: Map_2, gl: WebGLRenderingContext): void;
+    radiusInMeters: number;
+    // (undocumented)
+    render(gl: WebGLRenderingContext, matrix: number[]): void;
+    get type(): 'custom';
+}
 
 ```
