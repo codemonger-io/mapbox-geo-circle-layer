@@ -4,7 +4,7 @@
   "description": "Mapbox layer that renders a circle",
   "main": "./dist/index.js",
   "scripts": {
-    "build": "rollup -c --bundleConfigAsCjs",
+    "build": "rollup -c --bundleConfigAsCjs && api-extractor run --local",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -13,6 +13,7 @@
   "author": "Kikuo Emoto <kemoto@codemonger.io>",
   "license": "MIT",
   "devDependencies": {
+    "@microsoft/api-extractor": "^7.33.4",
     "@rollup/plugin-typescript": "^9.0.2",
     "rollup": "^3.2.3",
     "tslib": "^2.4.0",
