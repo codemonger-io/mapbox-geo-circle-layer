@@ -73,13 +73,13 @@ export interface GeoCircleLayerProperties {
  */
 export class GeoCircleLayer implements CustomLayerInterface {
   /** Radius of the circle. */
-  radiusInMeters: number;
+  private _radiusInMeters: number;
   /** Center of the circle. */
-  center: LngLat;
+  private _center: LngLat;
   /** Fill color of the circle. */
-  fill: RGBA;
+  private _fill: RGBA;
   /** Number of triangles to approximate the circle. */
-  numTriangles: number;
+  private _numTriangles: number;
 
   /** Shader program. */
   private program: WebGLProgram | null = null;
@@ -114,15 +114,35 @@ export class GeoCircleLayer implements CustomLayerInterface {
     public readonly id: string,
     props?: GeoCircleLayerProperties,
   ) {
-    this.radiusInMeters = props?.radiusInMeters ?? DEFAULT_RADIUS_IN_METERS;
-    this.center = props?.center ?? DEFAULT_CENTER;
-    this.fill = props?.fill ?? DEFAULT_FILL;
-    this.numTriangles = props?.numTriangles ?? DEFAULT_NUM_TRIANGLES;
+    this._radiusInMeters = props?.radiusInMeters ?? DEFAULT_RADIUS_IN_METERS;
+    this._center = props?.center ?? DEFAULT_CENTER;
+    this._fill = props?.fill ?? DEFAULT_FILL;
+    this._numTriangles = props?.numTriangles ?? DEFAULT_NUM_TRIANGLES;
   }
 
   /** Type is always "custom". */
   get type(): 'custom' {
     return 'custom';
+  }
+
+  /** Radius in meters of the circle. */
+  get radiusInMeters(): number {
+    return this._radiusInMeters;
+  }
+
+  /** Center of the circle. */
+  get center(): LngLat {
+    return this._center;
+  }
+
+  /** Fill color of the circle. */
+  get fill(): RGBA {
+    return this._fill;
+  }
+
+  /** Number of triangles to approximate the circle. */
+  get numTriangles(): number {
+    return this._numTriangles;
   }
 
   onAdd(map: Map, gl: WebGLRenderingContext) {
@@ -161,12 +181,12 @@ export class GeoCircleLayer implements CustomLayerInterface {
     }
     const aPos = gl.getAttribLocation(program, 'a_pos');
     this.aPos = aPos;
-    const center = MercatorCoordinate.fromLngLat(this.center);
+    const center = MercatorCoordinate.fromLngLat(this._center);
     const radius =
-      this.radiusInMeters * center.meterInMercatorCoordinateUnits();
+      this._radiusInMeters * center.meterInMercatorCoordinateUnits();
     const points = [center.x, center.y];
-    for (let i = 0; i < this.numTriangles; ++i) {
-      const angle = 2 * Math.PI * (i / this.numTriangles);
+    for (let i = 0; i < this._numTriangles; ++i) {
+      const angle = 2 * Math.PI * (i / this._numTriangles);
       const x = center.x + radius * Math.cos(angle);
       const y = center.y + radius * Math.sin(angle);
       points.push(x);
@@ -200,13 +220,13 @@ export class GeoCircleLayer implements CustomLayerInterface {
     );
     gl.uniform4fv(
       gl.getUniformLocation(program, 'u_fill'),
-      [this.fill.red, this.fill.green, this.fill.blue, this.fill.alpha],
+      [this._fill.red, this._fill.green, this._fill.blue, this._fill.alpha],
     );
     gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
     gl.enableVertexAttribArray(aPos);
     gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 0, 0);
     // we can assume BLEND is enabled and the blendFunc is
     // gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
-    gl.drawArrays(gl.TRIANGLE_FAN, 0, this.numTriangles + 2);
+    gl.drawArrays(gl.TRIANGLE_FAN, 0, this._numTriangles + 2);
   }
 }

@@ -31,15 +31,15 @@ export const DEFAULT_RADIUS_IN_METERS = 50;
 export class GeoCircleLayer implements CustomLayerInterface {
     constructor(id: string, props?: GeoCircleLayerProperties);
     // Warning: (ae-forgotten-export) The symbol "LngLat" needs to be exported by the entry point index.d.ts
-    center: LngLat;
+    get center(): LngLat;
     // Warning: (ae-forgotten-export) The symbol "RGBA" needs to be exported by the entry point index.d.ts
-    fill: RGBA;
+    get fill(): RGBA;
     // (undocumented)
     readonly id: string;
-    numTriangles: number;
+    get numTriangles(): number;
     // (undocumented)
     onAdd(map: Map_2, gl: WebGLRenderingContext): void;
-    radiusInMeters: number;
+    get radiusInMeters(): number;
     // (undocumented)
     render(gl: WebGLRenderingContext, matrix: number[]): void;
     get type(): 'custom';
