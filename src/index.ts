@@ -81,12 +81,16 @@ export class GeoCircleLayer implements CustomLayerInterface {
   /** Number of triangles to approximate the circle. */
   private _numTriangles: number;
 
+  /** Current map instance. */
+  private map: Map | null = null;
   /** Shader program. */
   private program: WebGLProgram | null = null;
   /** Position attribute index. */
   private aPos: GLint | undefined = undefined;
   /** Buffer. */
   private buffer: WebGLBuffer | null = null;
+  /** Whether the buffer needs refresh. */
+  private isDirty: boolean = true;
 
   /**
    * Initializes a layer.
@@ -130,9 +134,19 @@ export class GeoCircleLayer implements CustomLayerInterface {
     return this._radiusInMeters;
   }
 
-  /** Center of the circle. */
+  /**
+   * Center of the circle.
+   *
+   * @remarks
+   *
+   * Updating this property will trigger repaint of the map.
+   */
   get center(): LngLat {
     return this._center;
+  }
+  set center(center: LngLat) {
+    this._center = center;
+    this.triggerRepaint();
   }
 
   /** Fill color of the circle. */
@@ -145,7 +159,14 @@ export class GeoCircleLayer implements CustomLayerInterface {
     return this._numTriangles;
   }
 
+  /** Requests repaint. */
+  private triggerRepaint() {
+    this.isDirty = true;
+    this.map?.triggerRepaint();
+  }
+
   onAdd(map: Map, gl: WebGLRenderingContext) {
+    this.map = map;
     const vertexSource = `
       uniform mat4 u_matrix;
       attribute vec2 a_pos;
@@ -179,27 +200,39 @@ export class GeoCircleLayer implements CustomLayerInterface {
     }
     const aPos = gl.getAttribLocation(program, 'a_pos');
     this.aPos = aPos;
-    const center = MercatorCoordinate.fromLngLat(this._center);
-    const radius =
-      this._radiusInMeters * center.meterInMercatorCoordinateUnits();
-    const points = [center.x, center.y];
-    for (let i = 0; i < this._numTriangles; ++i) {
-      const angle = 2 * Math.PI * (i / this._numTriangles);
-      const x = center.x + radius * Math.cos(angle);
-      const y = center.y + radius * Math.sin(angle);
-      points.push(x);
-      points.push(y);
-    }
-    points.push(center.x + radius);
-    points.push(center.y);
     const buffer = gl.createBuffer();
     this.buffer = buffer;
-    gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
-    gl.bufferData(
-      gl.ARRAY_BUFFER,
-      new Float32Array(points),
-      gl.DYNAMIC_DRAW,
-    );
+  }
+
+  prerender(gl: WebGLRenderingContext) {
+    // refreshes the buffer if necessary
+    if (this.isDirty) {
+      const buffer = this.buffer;
+      if (buffer == null) {
+        console.error('buffer is not ready');
+        return;
+      }
+      this.isDirty = false;
+      const center = MercatorCoordinate.fromLngLat(this._center);
+      const radius =
+        this._radiusInMeters * center.meterInMercatorCoordinateUnits();
+      const points = [center.x, center.y];
+      for (let i = 0; i < this._numTriangles; ++i) {
+        const angle = 2 * Math.PI * (i / this._numTriangles);
+        const x = center.x + radius * Math.cos(angle);
+        const y = center.y + radius * Math.sin(angle);
+        points.push(x);
+        points.push(y);
+      }
+      points.push(center.x + radius);
+      points.push(center.y);
+      gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+      gl.bufferData(
+        gl.ARRAY_BUFFER,
+        new Float32Array(points),
+        gl.DYNAMIC_DRAW,
+      );
+    }
   }
 
   render(gl: WebGLRenderingContext, matrix: number[]) {
