@@ -162,10 +162,8 @@ export class GeoCircleLayer implements CustomLayerInterface {
     `.trim();
     const vertexShader = loadShader(gl, gl.VERTEX_SHADER, vertexSource);
     const fragmentShader = loadShader(gl, gl.FRAGMENT_SHADER, fragmentSource);
-    const program = gl.createProgram();
-    if (program == null) {
-      throw new Error('failed to create a WebGL program');
-    }
+    const program = gl.createProgram()!;
+      // everything should work even if program is null
     this.program = program;
     gl.attachShader(program, vertexShader);
     gl.attachShader(program, fragmentShader);

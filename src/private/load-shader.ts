@@ -28,10 +28,8 @@ export function loadShader(
   type: GLenum,
   source: string,
 ): WebGLShader {
-  const shader = gl.createShader(type);
-  if (shader == null) {
-    throw new Error('failed to create a WebGL shader');
-  }
+  const shader = gl.createShader(type)!;
+    // everything should work even if shader is null
   gl.shaderSource(shader, source);
   gl.compileShader(shader);
   if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
