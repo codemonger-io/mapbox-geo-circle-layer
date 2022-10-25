@@ -18,6 +18,32 @@ import { loadShader } from './private/load-shader';
 import type { LngLat, RGBA } from './types';
 
 /**
+ * Default radius of a circle.
+ *
+ * @alpha
+ */
+export const DEFAULT_RADIUS_IN_METERS = 50;
+
+/**
+ * Default center of a circle.
+ *
+ * @alpha
+ */
+export const DEFAULT_CENTER = { lng: 139.7671, lat: 35.6812 } as const;
+
+/**
+ * Default fill color of a circle.
+ *
+ * @alpha
+ */
+export const DEFAULT_FILL = {
+  red: 1.0,
+  green: 1.0,
+  blue: 1.0,
+  alpha: 1.0,
+} as const;
+
+/**
  * Default number of triangles to approximate a circle.
  *
  * @alpha
@@ -25,11 +51,36 @@ import type { LngLat, RGBA } from './types';
 export const DEFAULT_NUM_TRIANGLES = 32;
 
 /**
+ * Constructor properties for `GeoCircleLayer`.
+ *
+ * @alpha
+ */
+export interface GeoCircleLayerProperties {
+  /** Radius of the circle in meters. */
+  radiusInMeters?: number;
+  /** Center of the circle. */
+  center?: LngLat;
+  /** Fill color of the circle. */
+  fill?: RGBA;
+  /** Number of triangles to approximate the circle. */
+  numTriangles?: number;
+}
+
+/**
  * Custom layer that renders a simple circle.
  *
  * @alpha
  */
 export class GeoCircleLayer implements CustomLayerInterface {
+  /** Radius of the circle. */
+  radiusInMeters: number;
+  /** Center of the circle. */
+  center: LngLat;
+  /** Fill color of the circle. */
+  fill: RGBA;
+  /** Number of triangles to approximate the circle. */
+  numTriangles: number;
+
   /** Shader program. */
   private program: WebGLProgram | null = null;
   /** Position attribute index. */
@@ -42,38 +93,32 @@ export class GeoCircleLayer implements CustomLayerInterface {
    *
    * @remarks
    *
-   * Premultiply alpha to the red, gree, and blue components of `fill`.
+   * You may omit all or part of `props`.
+   * The following are default values for the properties,
+   * - `radiusInMeters`: `50`
+   * - `center`: `{ lng: 139.7671, lat: 35.6812 }` (Tokyo Station)
+   * - `fill`: `{ red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0 }` (white)
+   * - `numTriangles`: `32`
+   *
+   * Premultiply the alpha to the red, gree, and blue components of `fill`.
    *
    * @param id -
    *
    *   ID of the layer.
    *
-   * @param radiusInMeters -
+   * @param props -
    *
-   *   Radius of the circle in meters.
-   *
-   * @param center -
-   *
-   *   Center of the circle.
-   *   At Tokyo Station `{lng:139.7671, lat:35.6812}` by default.
-   *
-   * @param fill -
-   *
-   *   Fill color of the circle.
-   *   Opaque white by default.
-   *
-   * @param numTriangles -
-   *
-   *   Number of triangles to approximate a circle.
-   *   `32` by default.
+   *   Optional properties of the circle.
    */
   constructor(
     public readonly id: string,
-    public radiusInMeters: number,
-    public center: LngLat = { lng: 139.7671, lat: 35.6812 },
-    public fill: RGBA = { red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0 },
-    public numTriangles: number = DEFAULT_NUM_TRIANGLES,
-  ) {}
+    props?: GeoCircleLayerProperties,
+  ) {
+    this.radiusInMeters = props?.radiusInMeters ?? DEFAULT_RADIUS_IN_METERS;
+    this.center = props?.center ?? DEFAULT_CENTER;
+    this.fill = props?.fill ?? DEFAULT_FILL;
+    this.numTriangles = props?.numTriangles ?? DEFAULT_NUM_TRIANGLES;
+  }
 
   /** Type is always "custom". */
   get type(): 'custom' {

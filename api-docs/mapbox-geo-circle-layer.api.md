@@ -8,30 +8,49 @@ import { CustomLayerInterface } from 'mapbox-gl';
 import { Map as Map_2 } from 'mapbox-gl';
 
 // @alpha
+export const DEFAULT_CENTER: {
+    readonly lng: 139.7671;
+    readonly lat: 35.6812;
+};
+
+// @alpha
+export const DEFAULT_FILL: {
+    readonly red: 1;
+    readonly green: 1;
+    readonly blue: 1;
+    readonly alpha: 1;
+};
+
+// @alpha
 export const DEFAULT_NUM_TRIANGLES = 32;
 
 // @alpha
+export const DEFAULT_RADIUS_IN_METERS = 50;
+
+// @alpha
 export class GeoCircleLayer implements CustomLayerInterface {
-    constructor(id: string, radiusInMeters: number, center?: LngLat, fill?: RGBA, numTriangles?: number);
+    constructor(id: string, props?: GeoCircleLayerProperties);
     // Warning: (ae-forgotten-export) The symbol "LngLat" needs to be exported by the entry point index.d.ts
-    //
-    // (undocumented)
     center: LngLat;
     // Warning: (ae-forgotten-export) The symbol "RGBA" needs to be exported by the entry point index.d.ts
-    //
-    // (undocumented)
     fill: RGBA;
     // (undocumented)
     readonly id: string;
-    // (undocumented)
     numTriangles: number;
     // (undocumented)
     onAdd(map: Map_2, gl: WebGLRenderingContext): void;
-    // (undocumented)
     radiusInMeters: number;
     // (undocumented)
     render(gl: WebGLRenderingContext, matrix: number[]): void;
     get type(): 'custom';
+}
+
+// @alpha
+export interface GeoCircleLayerProperties {
+    center?: LngLat;
+    fill?: RGBA;
+    numTriangles?: number;
+    radiusInMeters?: number;
 }
 
 ```
