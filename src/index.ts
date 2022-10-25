@@ -18,20 +18,18 @@ import { loadShader } from './private/load-shader';
 import type { LngLat } from './types';
 
 /**
+ * Default number of triangles to approximate a circle.
+ *
+ * @alpha
+ */
+export const DEFAULT_NUM_TRIANGLES = 32;
+
+/**
  * Custom layer that renders a simple circle.
  *
  * @alpha
  */
 export class GeoCircleLayer implements CustomLayerInterface {
-  /** ID of the layer. */
-  id: string;
-  /** Radius in meters of the circle. */
-  radiusInMeters: number;
-  /** Center of the circle. */
-  center: LngLat;
-  /** Number of triangles to represent a circle. */
-  numTriangles: number;
-
   /** Shader program. */
   private program: WebGLProgram | null = null;
   /** Position attribute index. */
@@ -39,15 +37,33 @@ export class GeoCircleLayer implements CustomLayerInterface {
   /** Buffer. */
   private buffer: WebGLBuffer | null = null;
 
-  constructor() {
-    this.id = 'geo-circle';
-    this.radiusInMeters = 50;
-    this.center = {
-      lng: 139.7671,
-      lat: 35.6812,
-    }; // Tokyo Station
-    this.numTriangles = 32;
-  }
+  /**
+   * Initializes a layer.
+   *
+   * @param id -
+   *
+   *   ID of the layer.
+   *
+   * @param radiusInMeters -
+   *
+   *   Radius of the circle in meters.
+   *
+   * @param center -
+   *
+   *   Center of the circle.
+   *   At Tokyo Station `{lng:139.7671, lat:35.6812}` by default.
+   *
+   * @param numTriangles -
+   *
+   *   Number of triangles to approximate a circle.
+   *   `32` by default.
+   */
+  constructor(
+    public readonly id: string,
+    public radiusInMeters: number,
+    public center: LngLat = { lng: 139.7671, lat: 35.6812 },
+    public numTriangles: number = DEFAULT_NUM_TRIANGLES,
+  ) {}
 
   /** Type is always "custom". */
   get type(): 'custom' {
