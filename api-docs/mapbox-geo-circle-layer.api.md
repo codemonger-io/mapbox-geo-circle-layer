@@ -12,11 +12,15 @@ export const DEFAULT_NUM_TRIANGLES = 32;
 
 // @alpha
 export class GeoCircleLayer implements CustomLayerInterface {
-    constructor(id: string, radiusInMeters: number, center?: LngLat, numTriangles?: number);
+    constructor(id: string, radiusInMeters: number, center?: LngLat, fill?: RGBA, numTriangles?: number);
     // Warning: (ae-forgotten-export) The symbol "LngLat" needs to be exported by the entry point index.d.ts
     //
     // (undocumented)
     center: LngLat;
+    // Warning: (ae-forgotten-export) The symbol "RGBA" needs to be exported by the entry point index.d.ts
+    //
+    // (undocumented)
+    fill: RGBA;
     // (undocumented)
     readonly id: string;
     // (undocumented)

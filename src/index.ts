@@ -15,7 +15,7 @@ import {
 } from 'mapbox-gl';
 
 import { loadShader } from './private/load-shader';
-import type { LngLat } from './types';
+import type { LngLat, RGBA } from './types';
 
 /**
  * Default number of triangles to approximate a circle.
@@ -40,6 +40,10 @@ export class GeoCircleLayer implements CustomLayerInterface {
   /**
    * Initializes a layer.
    *
+   * @remarks
+   *
+   * Premultiply alpha to the red, gree, and blue components of `fill`.
+   *
    * @param id -
    *
    *   ID of the layer.
@@ -53,6 +57,11 @@ export class GeoCircleLayer implements CustomLayerInterface {
    *   Center of the circle.
    *   At Tokyo Station `{lng:139.7671, lat:35.6812}` by default.
    *
+   * @param fill -
+   *
+   *   Fill color of the circle.
+   *   Opaque white by default.
+   *
    * @param numTriangles -
    *
    *   Number of triangles to approximate a circle.
@@ -62,6 +71,7 @@ export class GeoCircleLayer implements CustomLayerInterface {
     public readonly id: string,
     public radiusInMeters: number,
     public center: LngLat = { lng: 139.7671, lat: 35.6812 },
+    public fill: RGBA = { red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0 },
     public numTriangles: number = DEFAULT_NUM_TRIANGLES,
   ) {}
 
@@ -77,13 +87,14 @@ export class GeoCircleLayer implements CustomLayerInterface {
       void main() {
         gl_Position = u_matrix * vec4(a_pos, 0.0, 1.0);
       }
-    `;
+    `.trim();
     const fragmentSource = `
+      uniform lowp vec4 u_fill;
       void main() {
         /* premultiplies the alpha to the RGB components. */
-        gl_FragColor = vec4(0.25, 0.25, 0.5, 0.5);
+        gl_FragColor = u_fill;
       }
-    `;
+    `.trim();
     const vertexShader = loadShader(gl, gl.VERTEX_SHADER, vertexSource);
     const fragmentShader = loadShader(gl, gl.FRAGMENT_SHADER, fragmentSource);
     const program = gl.createProgram();
@@ -141,6 +152,10 @@ export class GeoCircleLayer implements CustomLayerInterface {
       gl.getUniformLocation(program, 'u_matrix'),
       false,
       matrix,
+    );
+    gl.uniform4fv(
+      gl.getUniformLocation(program, 'u_fill'),
+      [this.fill.red, this.fill.green, this.fill.blue, this.fill.alpha],
     );
     gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
     gl.enableVertexAttribArray(aPos);
