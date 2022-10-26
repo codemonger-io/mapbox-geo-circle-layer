@@ -83,6 +83,10 @@ export class GeoCircleLayer implements CustomLayerInterface {
 
   /** Current map instance. */
   private map: Map | null = null;
+  /** Vertex shader. */
+  private vertexShader: WebGLShader | null = null;
+  /** Fragment shader. */
+  private fragmentShader: WebGLShader | null = null;
   /** Shader program. */
   private program: WebGLProgram | null = null;
   /** Position attribute index. */
@@ -213,7 +217,9 @@ export class GeoCircleLayer implements CustomLayerInterface {
       }
     `.trim();
     const vertexShader = loadShader(gl, gl.VERTEX_SHADER, vertexSource);
+    this.vertexShader = vertexShader;
     const fragmentShader = loadShader(gl, gl.FRAGMENT_SHADER, fragmentSource);
+    this.fragmentShader = fragmentShader;
     const program = gl.createProgram()!;
       // everything should work even if program is null
     this.program = program;
@@ -233,6 +239,19 @@ export class GeoCircleLayer implements CustomLayerInterface {
     this.aPos = aPos;
     const buffer = gl.createBuffer();
     this.buffer = buffer;
+  }
+
+  onRemove(map: Map, gl: WebGLRenderingContext) {
+    gl.deleteBuffer(this.buffer);
+    this.buffer = null;
+    gl.deleteProgram(this.program);
+    this.program = null;
+    gl.deleteShader(this.vertexShader);
+    this.vertexShader = null;
+    gl.deleteShader(this.fragmentShader);
+    this.fragmentShader = null;
+    this.map = null;
+    this.isDirty = true;
   }
 
   prerender(gl: WebGLRenderingContext) {
