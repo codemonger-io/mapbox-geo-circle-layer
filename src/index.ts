@@ -83,6 +83,8 @@ export class GeoCircleLayer implements CustomLayerInterface {
 
   /** Current map instance. */
   private map: Map | null = null;
+  /** Function that removes listeners from `map`. */
+  private removeListeners: (() => void) | null = null;
   /** Vertex shader. */
   private vertexShader: WebGLShader | null = null;
   /** Fragment shader. */
@@ -202,56 +204,87 @@ export class GeoCircleLayer implements CustomLayerInterface {
 
   onAdd(map: Map, gl: WebGLRenderingContext) {
     this.map = map;
-    const vertexSource = `
-      uniform mat4 u_matrix;
-      attribute vec2 a_pos;
-      void main() {
-        gl_Position = u_matrix * vec4(a_pos, 0.0, 1.0);
+    // initialization of WebGL objects is also necessary when the WebGL context
+    // is lost and restored:
+    // https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/getContext
+    //
+    // so reuses the following function
+    const createWebGLObjects = () => {
+      const vertexSource = `
+        uniform mat4 u_matrix;
+        attribute vec2 a_pos;
+        void main() {
+          gl_Position = u_matrix * vec4(a_pos, 0.0, 1.0);
+        }
+      `.trim();
+      const fragmentSource = `
+        uniform lowp vec4 u_fill;
+        void main() {
+          /* premultiplies the alpha to the RGB components. */
+          gl_FragColor = u_fill;
+        }
+      `.trim();
+      const vertexShader = loadShader(gl, gl.VERTEX_SHADER, vertexSource);
+      this.vertexShader = vertexShader;
+      const fragmentShader = loadShader(gl, gl.FRAGMENT_SHADER, fragmentSource);
+      this.fragmentShader = fragmentShader;
+      const program = gl.createProgram()!;
+        // everything should work even if program is null
+      this.program = program;
+      gl.attachShader(program, vertexShader);
+      gl.attachShader(program, fragmentShader);
+      gl.linkProgram(program);
+      if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+        console.error(
+          'failed to link a program',
+          gl.getProgramInfoLog(program),
+        );
+        throw new Error(
+          `failed to link a program: ${gl.getProgramInfoLog(program)}`,
+        );
       }
-    `.trim();
-    const fragmentSource = `
-      uniform lowp vec4 u_fill;
-      void main() {
-        /* premultiplies the alpha to the RGB components. */
-        gl_FragColor = u_fill;
-      }
-    `.trim();
-    const vertexShader = loadShader(gl, gl.VERTEX_SHADER, vertexSource);
-    this.vertexShader = vertexShader;
-    const fragmentShader = loadShader(gl, gl.FRAGMENT_SHADER, fragmentSource);
-    this.fragmentShader = fragmentShader;
-    const program = gl.createProgram()!;
-      // everything should work even if program is null
-    this.program = program;
-    gl.attachShader(program, vertexShader);
-    gl.attachShader(program, fragmentShader);
-    gl.linkProgram(program);
-    if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
-      console.error(
-        'failed to link a program',
-        gl.getProgramInfoLog(program),
-      );
-      throw new Error(
-        `failed to link a program: ${gl.getProgramInfoLog(program)}`,
-      );
-    }
-    const aPos = gl.getAttribLocation(program, 'a_pos');
-    this.aPos = aPos;
-    const buffer = gl.createBuffer();
-    this.buffer = buffer;
+      const aPos = gl.getAttribLocation(program, 'a_pos');
+      this.aPos = aPos;
+      const buffer = gl.createBuffer();
+      this.buffer = buffer;
+    };
+    createWebGLObjects();
+    // processes WebGL context events
+    const onWebglcontextlost = () => {
+      this.clearWebGLReferences();
+    };
+    const onWebglcontextrestored = () => {
+      // according to the MDN documentation, the WebGL context object associated
+      // with the same canvas is always the same.
+      // so it should be safe to reference `gl` here.
+      createWebGLObjects();
+    };
+    map.on('webglcontextlost', onWebglcontextlost);
+    map.on('webglcontextrestored', onWebglcontextrestored);
+    this.removeListeners = () => {
+      map.off('webglcontextlost', onWebglcontextlost);
+      map.off('webglcontextrestored', onWebglcontextrestored);
+    };
   }
 
   onRemove(map: Map, gl: WebGLRenderingContext) {
+    if (this.removeListeners != null) {
+      this.removeListeners();
+    }
     gl.deleteBuffer(this.buffer);
-    this.buffer = null;
     gl.deleteProgram(this.program);
-    this.program = null;
     gl.deleteShader(this.vertexShader);
-    this.vertexShader = null;
     gl.deleteShader(this.fragmentShader);
-    this.fragmentShader = null;
+    this.clearWebGLReferences();
     this.map = null;
     this.isDirty = true;
+  }
+
+  private clearWebGLReferences() {
+    this.buffer = null;
+    this.program = null;
+    this.vertexShader = null;
+    this.fragmentShader = null;
   }
 
   prerender(gl: WebGLRenderingContext) {
