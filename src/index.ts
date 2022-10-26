@@ -175,9 +175,19 @@ export class GeoCircleLayer implements CustomLayerInterface {
     this.map?.triggerRepaint();
   }
 
-  /** Number of triangles to approximate the circle. */
+  /**
+   * Number of triangles to approximate the circle.
+   *
+   * @remarks
+   *
+   * Updating this property will trigger repaint of the map.
+   */
   get numTriangles(): number {
     return this._numTriangles;
+  }
+  set numTriangles(numTriangles: number) {
+    this._numTriangles = numTriangles;
+    this.triggerRepaint();
   }
 
   /** Requests repaint. */

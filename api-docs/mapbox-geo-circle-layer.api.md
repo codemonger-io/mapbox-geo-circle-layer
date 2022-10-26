@@ -39,6 +39,7 @@ export class GeoCircleLayer implements CustomLayerInterface {
     // (undocumented)
     readonly id: string;
     get numTriangles(): number;
+    set numTriangles(numTriangles: number);
     // (undocumented)
     onAdd(map: Map_2, gl: WebGLRenderingContext): void;
     // (undocumented)
