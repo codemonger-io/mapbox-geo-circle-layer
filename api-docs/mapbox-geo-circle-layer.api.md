@@ -35,6 +35,7 @@ export class GeoCircleLayer implements CustomLayerInterface {
     set center(center: LngLat);
     // Warning: (ae-forgotten-export) The symbol "RGBA" needs to be exported by the entry point index.d.ts
     get fill(): RGBA;
+    set fill(fill: RGBA);
     // (undocumented)
     readonly id: string;
     get numTriangles(): number;

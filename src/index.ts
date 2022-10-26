@@ -149,9 +149,20 @@ export class GeoCircleLayer implements CustomLayerInterface {
     this.triggerRepaint();
   }
 
-  /** Fill color of the circle. */
+  /**
+   * Fill color of the circle.
+   *
+   * @remarks
+   *
+   * Updating this property will trigger repaint of the map.
+   */
   get fill(): RGBA {
     return this._fill;
+  }
+  set fill(fill: RGBA) {
+    this._fill = fill;
+    // no need to recalculate the circle
+    this.map?.triggerRepaint();
   }
 
   /** Number of triangles to approximate the circle. */
