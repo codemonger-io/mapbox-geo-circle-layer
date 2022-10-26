@@ -44,6 +44,7 @@ export class GeoCircleLayer implements CustomLayerInterface {
     // (undocumented)
     prerender(gl: WebGLRenderingContext): void;
     get radiusInMeters(): number;
+    set radiusInMeters(radiusInMeters: number);
     // (undocumented)
     render(gl: WebGLRenderingContext, matrix: number[]): void;
     get type(): 'custom';

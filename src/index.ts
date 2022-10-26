@@ -129,9 +129,19 @@ export class GeoCircleLayer implements CustomLayerInterface {
     return 'custom';
   }
 
-  /** Radius in meters of the circle. */
+  /**
+   * Radius in meters of the circle.
+   *
+   * @remarks
+   *
+   * Updating this property will trigger repaint of the map.
+   */
   get radiusInMeters(): number {
     return this._radiusInMeters;
+  }
+  set radiusInMeters(radiusInMeters: number) {
+    this._radiusInMeters = radiusInMeters;
+    this.triggerRepaint();
   }
 
   /**
