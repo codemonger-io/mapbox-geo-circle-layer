@@ -19,5 +19,7 @@ set fill(fill: RGBA);
 
 ## Remarks
 
+Premultiply the alpha to the red, green, and blue components.
+
 Updating this property will trigger repaint of the map.
 

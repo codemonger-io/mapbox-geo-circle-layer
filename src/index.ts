@@ -171,6 +171,8 @@ export class GeoCircleLayer implements CustomLayerInterface {
    *
    * @remarks
    *
+   * Premultiply the alpha to the red, green, and blue components.
+   *
    * Updating this property will trigger repaint of the map.
    */
   get fill(): RGBA {
