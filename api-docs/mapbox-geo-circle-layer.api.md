@@ -7,13 +7,13 @@
 import { CustomLayerInterface } from 'mapbox-gl';
 import { Map as Map_2 } from 'mapbox-gl';
 
-// @alpha
+// @beta
 export const DEFAULT_CENTER: {
     readonly lng: 139.7671;
     readonly lat: 35.6812;
 };
 
-// @alpha
+// @beta
 export const DEFAULT_FILL: {
     readonly red: 1;
     readonly green: 1;
@@ -21,19 +21,17 @@ export const DEFAULT_FILL: {
     readonly alpha: 1;
 };
 
-// @alpha
+// @beta
 export const DEFAULT_NUM_TRIANGLES = 32;
 
-// @alpha
+// @beta
 export const DEFAULT_RADIUS_IN_METERS = 50;
 
-// @alpha
+// @beta
 export class GeoCircleLayer implements CustomLayerInterface {
     constructor(id: string, props?: GeoCircleLayerProperties);
-    // Warning: (ae-forgotten-export) The symbol "LngLat" needs to be exported by the entry point index.d.ts
     get center(): LngLat;
     set center(center: LngLat);
-    // Warning: (ae-forgotten-export) The symbol "RGBA" needs to be exported by the entry point index.d.ts
     get fill(): RGBA;
     set fill(fill: RGBA);
     // (undocumented)
@@ -53,12 +51,26 @@ export class GeoCircleLayer implements CustomLayerInterface {
     get type(): 'custom';
 }
 
-// @alpha
+// @beta
 export interface GeoCircleLayerProperties {
     center?: LngLat;
     fill?: RGBA;
     numTriangles?: number;
     radiusInMeters?: number;
+}
+
+// @beta
+export interface LngLat {
+    lat: number;
+    lng: number;
+}
+
+// @beta
+export interface RGBA {
+    alpha: number;
+    blue: number;
+    green: number;
+    red: number;
 }
 
 ```

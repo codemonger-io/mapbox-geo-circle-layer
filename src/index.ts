@@ -16,25 +16,26 @@ import {
 
 import { loadShader } from './private/load-shader';
 import type { LngLat, RGBA } from './types';
+export { LngLat, RGBA } from './types';
 
 /**
  * Default radius of a circle.
  *
- * @alpha
+ * @beta
  */
 export const DEFAULT_RADIUS_IN_METERS = 50;
 
 /**
- * Default center of a circle.
+ * Default center of a circle (Tokyo Station).
  *
- * @alpha
+ * @beta
  */
 export const DEFAULT_CENTER = { lng: 139.7671, lat: 35.6812 } as const;
 
 /**
- * Default fill color of a circle.
+ * Default fill color of a circle (opaque white).
  *
- * @alpha
+ * @beta
  */
 export const DEFAULT_FILL = {
   red: 1.0,
@@ -46,14 +47,14 @@ export const DEFAULT_FILL = {
 /**
  * Default number of triangles to approximate a circle.
  *
- * @alpha
+ * @beta
  */
 export const DEFAULT_NUM_TRIANGLES = 32;
 
 /**
  * Constructor properties for `GeoCircleLayer`.
  *
- * @alpha
+ * @beta
  */
 export interface GeoCircleLayerProperties {
   /** Radius of the circle in meters. */
@@ -69,7 +70,7 @@ export interface GeoCircleLayerProperties {
 /**
  * Custom layer that renders a simple circle.
  *
- * @alpha
+ * @beta
  */
 export class GeoCircleLayer implements CustomLayerInterface {
   /** Radius of the circle. */
@@ -118,7 +119,7 @@ export class GeoCircleLayer implements CustomLayerInterface {
    *
    * @param props -
    *
-   *   Optional properties of the circle.
+   *   Properties of the circle.
    */
   constructor(
     public readonly id: string,

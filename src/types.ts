@@ -13,7 +13,7 @@ export interface LngLat {
 /**
  * RGBA components.
  *
- * @alpha
+ * @beta
  */
 export interface RGBA {
   /** Red component. [0, 1]. */

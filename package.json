@@ -11,6 +11,7 @@
   ],
   "scripts": {
     "build": "rollup -c --bundleConfigAsCjs && api-extractor run --local",
+    "build:doc": "npm run build && api-documenter markdown --input-folder temp --output-folder api-docs/markdown",
     "type-check": "tsc --noEmit",
     "prepare": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -21,6 +22,7 @@
   "author": "Kikuo Emoto <kemoto@codemonger.io>",
   "license": "MIT",
   "devDependencies": {
+    "@microsoft/api-documenter": "^7.19.23",
     "@microsoft/api-extractor": "^7.33.4",
     "@rollup/plugin-typescript": "^9.0.2",
     "@types/mapbox-gl": "^2.7.6",
