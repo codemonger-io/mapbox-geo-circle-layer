@@ -120,15 +120,32 @@ export class GeoCircleLayer implements CustomLayerInterface {
    * @param props -
    *
    *   Properties of the circle.
+   *
+   * @throws RangeError
+   *
+   *   If `props.radiusInMeters` is negative,
+   *   or if `props.numTriangles` is less than `3`.
    */
   constructor(
     public readonly id: string,
     props?: GeoCircleLayerProperties,
   ) {
-    this._radiusInMeters = props?.radiusInMeters ?? DEFAULT_RADIUS_IN_METERS;
+    const radiusInMeters = props?.radiusInMeters ?? DEFAULT_RADIUS_IN_METERS;
+    if (radiusInMeters < 0) {
+      throw new RangeError(
+        `radiusInMeters must be ≥ 0 but ${radiusInMeters} was given`,
+      );
+    }
+    const numTriangles = props?.numTriangles ?? DEFAULT_NUM_TRIANGLES;
+    if (numTriangles < 3) {
+      throw new RangeError(
+        `numTriangles must be ≥ 3 but ${numTriangles} was given`,
+      );
+    }
+    this._radiusInMeters = radiusInMeters;
     this._center = props?.center ?? DEFAULT_CENTER;
     this._fill = props?.fill ?? DEFAULT_FILL;
-    this._numTriangles = props?.numTriangles ?? DEFAULT_NUM_TRIANGLES;
+    this._numTriangles = numTriangles;
   }
 
   /** Type is always "custom". */
@@ -142,11 +159,18 @@ export class GeoCircleLayer implements CustomLayerInterface {
    * @remarks
    *
    * Updating this property will trigger repaint of the map.
+   *
+   * Throws `RangeError`, if a negative value is given to the setter.
    */
   get radiusInMeters(): number {
     return this._radiusInMeters;
   }
   set radiusInMeters(radiusInMeters: number) {
+    if (radiusInMeters < 0) {
+      throw new RangeError(
+        `radiusInMeters must be ≥ 0 but ${radiusInMeters} was given`,
+      );
+    }
     this._radiusInMeters = radiusInMeters;
     this.triggerRepaint();
   }
@@ -190,11 +214,18 @@ export class GeoCircleLayer implements CustomLayerInterface {
    * @remarks
    *
    * Updating this property will trigger repaint of the map.
+   *
+   * Throws `RangeError`, if a value less than 3 is given to the setter.
    */
   get numTriangles(): number {
     return this._numTriangles;
   }
   set numTriangles(numTriangles: number) {
+    if (numTriangles < 3) {
+      throw new RangeError(
+        `numTriangles must be ≥ 3 but ${numTriangles} was given`,
+      );
+    }
     this._numTriangles = numTriangles;
     this.triggerRepaint();
   }
