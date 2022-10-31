@@ -77,6 +77,12 @@ You can run a type checker without building the library.
 npm run type-check
 ```
 
+### Running tests
+
+```sh
+npm test
+```
+
 ## Alternatives to this library
 
 ### Built-in circle layer
