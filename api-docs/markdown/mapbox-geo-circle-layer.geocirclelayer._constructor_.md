@@ -22,6 +22,12 @@ constructor(id: string, props?: GeoCircleLayerProperties);
 |  id | string | ID of the layer. |
 |  props | [GeoCircleLayerProperties](./mapbox-geo-circle-layer.geocirclelayerproperties.md) | <i>(Optional)</i> Properties of the circle. |
 
+## Exceptions
+
+RangeError
+
+If `props.radiusInMeters` is negative, or if `props.numTriangles` is less than `3`<!-- -->.
+
 ## Remarks
 
 You may omit all or part of `props`<!-- -->. The following are default values for the properties, - `radiusInMeters`<!-- -->: `50` - `center`<!-- -->: `{ lng: 139.7671, lat: 35.6812 }` (Tokyo Station) - `fill`<!-- -->: `{ red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0 }` (white) - `numTriangles`<!-- -->: `32`

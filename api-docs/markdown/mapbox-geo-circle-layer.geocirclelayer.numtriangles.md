@@ -21,3 +21,5 @@ set numTriangles(numTriangles: number);
 
 Updating this property will trigger repaint of the map.
 
+Throws `RangeError`<!-- -->, if a value less than 3 is given to the setter.
+

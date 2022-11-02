@@ -21,3 +21,5 @@ set radiusInMeters(radiusInMeters: number);
 
 Updating this property will trigger repaint of the map.
 
+Throws `RangeError`<!-- -->, if a negative value is given to the setter.
+
