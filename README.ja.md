@@ -49,6 +49,10 @@ map.addLayer(new GeoCircleLayer('example-circle', {
 
 ## 開発
 
+### Prerequisites
+
+このライブラリをビルドするには[Node.js](https://nodejs.org/en/)のバージョン14以降が必要です。
+
 ### 依存関係のインストール
 
 ```sh

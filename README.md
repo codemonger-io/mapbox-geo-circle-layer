@@ -49,6 +49,10 @@ Please refer to the [`api-docs/markdown` folder](./api-docs/markdown/index.md).
 
 ## Development
 
+### Prerequisites
+
+[Node.js](https://nodejs.org/en/) version 14 or higher is required to build this library.
+
 ### Installing dependencies
 
 ```sh
