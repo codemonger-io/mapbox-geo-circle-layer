@@ -87,6 +87,10 @@ npm run type-check
 npm test
 ```
 
+### GitHub workflows
+
+[GitHub Actions](https://github.com/features/actions) that builds and verifies the target will start when a pull-request or push is initiated to the `main` branch.
+
 ## Alternatives to this library
 
 ### Built-in circle layer
