@@ -1,0 +1,11 @@
+name: Build and verify main on push
+
+run-name: Verifying main
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  call-build-and-verify:
+    uses: ./.github/workflows/build-and-verify.yaml
