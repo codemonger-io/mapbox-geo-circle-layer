@@ -1,0 +1,11 @@
+name: Build and verify main on PR
+
+run-name: "Verifying PR: ${{github.base_ref}} ← ${{github.head_ref}} (initiated by ${{github.actor}})"
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  call-build-and-verify:
+    uses: ./.github/workflows/build-and-verify.yaml
