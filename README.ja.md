@@ -87,6 +87,10 @@ npm run type-check
 npm test
 ```
 
+### GitHubワークフロー
+
+`main`ブランチに対してPull RequestもしくはPushが行われると、ターゲットをビルドして検証する[GitHub Actions](https://github.com/features/actions)が開始します。
+
 ## このライブラリの代替
 
 ### 組み込みのCircleレイヤー
