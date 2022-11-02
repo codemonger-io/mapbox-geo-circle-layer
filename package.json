@@ -21,6 +21,9 @@
   ],
   "author": "Kikuo Emoto <kemoto@codemonger.io>",
   "license": "MIT",
+  "engines": {
+    "node": ">=14.0.0"
+  },
   "devDependencies": {
     "@microsoft/api-documenter": "^7.19.23",
     "@microsoft/api-extractor": "^7.33.4",
