@@ -10,7 +10,7 @@
     "dist/index.d.ts"
   ],
   "scripts": {
-    "build": "rollup -c --bundleConfigAsCjs && api-extractor run --local",
+    "build": "rollup -c && api-extractor run --local",
     "build:doc": "npm run build && api-documenter markdown --input-folder temp --output-folder api-docs/markdown",
     "type-check": "tsc --noEmit",
     "prepare": "npm run build",
