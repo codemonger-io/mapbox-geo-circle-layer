@@ -33,6 +33,8 @@ map.addLayer(new GeoCircleLayer('example-circle', {
 You will see something like the following,
 ![example circle](./example-circle.png)
 
+There is an example project in the [`example` folder](./example).
+
 #### Updating properties
 
 You can change the following properties of a [`GeoCircleLayer`](./api-docs/markdown/mapbox-geo-circle-layer.geocirclelayer.md) after creating it.
