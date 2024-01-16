@@ -10,12 +10,12 @@
 
 以下のコマンドを実行してください。
 ```sh
-npm install https://github.com/codemonger-io/mapbox-geo-circle-layer.git#v0.1.0
+npm install https://github.com/codemonger-io/mapbox-geo-circle-layer.git#v0.1.1
 ```
 
 ### 事前要件
 
-このライブラリはMapbox GL JSバージョン2.xと組み合わせて使用する前提です。
+このライブラリはMapbox GL JSバージョン2.xおよび3.xと組み合わせて使用する前提です。
 
 ### 使い方
 

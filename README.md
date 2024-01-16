@@ -10,12 +10,12 @@ Renders a simple circle on a [Mapbox GL JS](https://docs.mapbox.com/mapbox-gl-js
 
 Please run the following command:
 ```sh
-npm install https://github.com/codemonger-io/mapbox-geo-circle-layer.git#v0.1.0
+npm install https://github.com/codemonger-io/mapbox-geo-circle-layer.git#v0.1.1
 ```
 
 ### Prerequisites
 
-This library is intended to work with Mapbox GL JS v2.x.
+This library is intended to work with Mapbox GL JS v2.x and v3.x.
 
 ### Usage
 
