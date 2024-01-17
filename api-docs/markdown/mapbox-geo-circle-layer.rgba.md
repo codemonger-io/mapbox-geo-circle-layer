@@ -4,12 +4,12 @@
 
 ## RGBA interface
 
-> This API is provided as a preview for developers and may change based on feedback that we receive. Do not use this API in a production environment.
+> This API is provided as a beta preview for developers and may change based on feedback that we receive. Do not use this API in a production environment.
 > 
 
 RGBA components.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface RGBA 
@@ -19,8 +19,8 @@ export interface RGBA
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [alpha](./mapbox-geo-circle-layer.rgba.alpha.md) |  | number | <b><i>(BETA)</i></b> Alpha component. \[0, 1\]. |
-|  [blue](./mapbox-geo-circle-layer.rgba.blue.md) |  | number | <b><i>(BETA)</i></b> Blue component. \[0, 1\]. |
-|  [green](./mapbox-geo-circle-layer.rgba.green.md) |  | number | <b><i>(BETA)</i></b> Green component. \[0, 1\]. |
-|  [red](./mapbox-geo-circle-layer.rgba.red.md) |  | number | <b><i>(BETA)</i></b> Red component. \[0, 1\]. |
+|  [alpha](./mapbox-geo-circle-layer.rgba.alpha.md) |  | number | **_(BETA)_** Alpha component. \[0, 1\]. |
+|  [blue](./mapbox-geo-circle-layer.rgba.blue.md) |  | number | **_(BETA)_** Blue component. \[0, 1\]. |
+|  [green](./mapbox-geo-circle-layer.rgba.green.md) |  | number | **_(BETA)_** Green component. \[0, 1\]. |
+|  [red](./mapbox-geo-circle-layer.rgba.red.md) |  | number | **_(BETA)_** Red component. \[0, 1\]. |
 

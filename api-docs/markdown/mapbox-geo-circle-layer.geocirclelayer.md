@@ -4,41 +4,41 @@
 
 ## GeoCircleLayer class
 
-> This API is provided as a preview for developers and may change based on feedback that we receive. Do not use this API in a production environment.
+> This API is provided as a beta preview for developers and may change based on feedback that we receive. Do not use this API in a production environment.
 > 
 
 Custom layer that renders a simple circle.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export declare class GeoCircleLayer implements CustomLayerInterface 
 ```
-<b>Implements:</b> CustomLayerInterface
+**Implements:** CustomLayerInterface
 
 ## Constructors
 
 |  Constructor | Modifiers | Description |
 |  --- | --- | --- |
-|  [(constructor)(id, props)](./mapbox-geo-circle-layer.geocirclelayer._constructor_.md) |  | <b><i>(BETA)</i></b> Initializes a layer. |
+|  [(constructor)(id, props)](./mapbox-geo-circle-layer.geocirclelayer._constructor_.md) |  | **_(BETA)_** Initializes a layer. |
 
 ## Properties
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [center](./mapbox-geo-circle-layer.geocirclelayer.center.md) |  | [LngLat](./mapbox-geo-circle-layer.lnglat.md) | <b><i>(BETA)</i></b> Center of the circle. |
-|  [fill](./mapbox-geo-circle-layer.geocirclelayer.fill.md) |  | [RGBA](./mapbox-geo-circle-layer.rgba.md) | <b><i>(BETA)</i></b> Fill color of the circle. |
-|  [id](./mapbox-geo-circle-layer.geocirclelayer.id.md) | <code>readonly</code> | string | <b><i>(BETA)</i></b> |
-|  [numTriangles](./mapbox-geo-circle-layer.geocirclelayer.numtriangles.md) |  | number | <b><i>(BETA)</i></b> Number of triangles to approximate the circle. |
-|  [radiusInMeters](./mapbox-geo-circle-layer.geocirclelayer.radiusinmeters.md) |  | number | <b><i>(BETA)</i></b> Radius in meters of the circle. |
-|  [type](./mapbox-geo-circle-layer.geocirclelayer.type.md) | <code>readonly</code> | 'custom' | <b><i>(BETA)</i></b> Type is always "custom". |
+|  [center](./mapbox-geo-circle-layer.geocirclelayer.center.md) |  | [LngLat](./mapbox-geo-circle-layer.lnglat.md) | **_(BETA)_** Center of the circle. |
+|  [fill](./mapbox-geo-circle-layer.geocirclelayer.fill.md) |  | [RGBA](./mapbox-geo-circle-layer.rgba.md) | **_(BETA)_** Fill color of the circle. |
+|  [id](./mapbox-geo-circle-layer.geocirclelayer.id.md) | <code>readonly</code> | string | **_(BETA)_** |
+|  [numTriangles](./mapbox-geo-circle-layer.geocirclelayer.numtriangles.md) |  | number | **_(BETA)_** Number of triangles to approximate the circle. |
+|  [radiusInMeters](./mapbox-geo-circle-layer.geocirclelayer.radiusinmeters.md) |  | number | **_(BETA)_** Radius in meters of the circle. |
+|  [type](./mapbox-geo-circle-layer.geocirclelayer.type.md) | <code>readonly</code> | 'custom' | **_(BETA)_** Type is always "custom". |
 
 ## Methods
 
 |  Method | Modifiers | Description |
 |  --- | --- | --- |
-|  [onAdd(map, gl)](./mapbox-geo-circle-layer.geocirclelayer.onadd.md) |  | <b><i>(BETA)</i></b> |
-|  [onRemove(map, gl)](./mapbox-geo-circle-layer.geocirclelayer.onremove.md) |  | <b><i>(BETA)</i></b> |
-|  [prerender(gl)](./mapbox-geo-circle-layer.geocirclelayer.prerender.md) |  | <b><i>(BETA)</i></b> |
-|  [render(gl, matrix)](./mapbox-geo-circle-layer.geocirclelayer.render.md) |  | <b><i>(BETA)</i></b> |
+|  [onAdd(map, gl)](./mapbox-geo-circle-layer.geocirclelayer.onadd.md) |  | **_(BETA)_** |
+|  [onRemove(map, gl)](./mapbox-geo-circle-layer.geocirclelayer.onremove.md) |  | **_(BETA)_** |
+|  [prerender(gl)](./mapbox-geo-circle-layer.geocirclelayer.prerender.md) |  | **_(BETA)_** |
+|  [render(gl, matrix)](./mapbox-geo-circle-layer.geocirclelayer.render.md) |  | **_(BETA)_** |
 

@@ -4,12 +4,12 @@
 
 ## GeoCircleLayer.(constructor)
 
-> This API is provided as a preview for developers and may change based on feedback that we receive. Do not use this API in a production environment.
+> This API is provided as a beta preview for developers and may change based on feedback that we receive. Do not use this API in a production environment.
 > 
 
 Initializes a layer.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 constructor(id: string, props?: GeoCircleLayerProperties);
@@ -20,7 +20,7 @@ constructor(id: string, props?: GeoCircleLayerProperties);
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  id | string | ID of the layer. |
-|  props | [GeoCircleLayerProperties](./mapbox-geo-circle-layer.geocirclelayerproperties.md) | <i>(Optional)</i> Properties of the circle. |
+|  props | [GeoCircleLayerProperties](./mapbox-geo-circle-layer.geocirclelayerproperties.md) | _(Optional)_ Properties of the circle. |
 
 ## Exceptions
 
@@ -32,5 +32,5 @@ If `props.radiusInMeters` is negative, or if `props.numTriangles` is less than `
 
 You may omit all or part of `props`<!-- -->. The following are default values for the properties, - `radiusInMeters`<!-- -->: `50` - `center`<!-- -->: `{ lng: 139.7671, lat: 35.6812 }` (Tokyo Station) - `fill`<!-- -->: `{ red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0 }` (white) - `numTriangles`<!-- -->: `32`
 
-Premultiply the alpha to the red, gree, and blue components of `fill`<!-- -->.
+Since v0.2.0, you no longer have to premultiply the alpha to the red, gree, and blue components of `fill`<!-- -->.
 

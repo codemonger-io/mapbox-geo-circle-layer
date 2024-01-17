@@ -4,12 +4,12 @@
 
 ## GeoCircleLayer.fill property
 
-> This API is provided as a preview for developers and may change based on feedback that we receive. Do not use this API in a production environment.
+> This API is provided as a beta preview for developers and may change based on feedback that we receive. Do not use this API in a production environment.
 > 
 
 Fill color of the circle.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 get fill(): RGBA;
@@ -19,7 +19,7 @@ set fill(fill: RGBA);
 
 ## Remarks
 
-Premultiply the alpha to the red, green, and blue components.
+Since v0.2.0, you no longer have to premultiply the alpha to the red, green, and blue components.
 
 Updating this property will trigger repaint of the map.
 

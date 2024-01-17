@@ -66,6 +66,9 @@ export interface LngLat {
 }
 
 // @beta
+export function multiplyAlpha({ red, green, blue, alpha }: RGBA): RGBA;
+
+// @beta
 export interface RGBA {
     alpha: number;
     blue: number;
