@@ -9,17 +9,17 @@ const circleLayerParameters = [
   {
     radiusInMeters: 100,
     center: { lng: 139.7671, lat: 35.6812 },
-    fill: { red: 0.25, green: 0.25, blue: 0.5, alpha: 0.5 }
+    fill: { red: 0.5, green: 0.5, blue: 1.0, alpha: 0.5 }
   },
   {
     radiusInMeters: 250,
     center: { lng: 139.7671, lat: 35.6812 },
-    fill: { red: 0.5, green: 0.25, blue: 0.25, alpha: 0.3 }
+    fill: { red: 1.0, green: 0.5, blue: 0.5, alpha: 0.3 }
   },
   {
     radiusInMeters: 1000,
     center: { lng: 139.7671, lat: 35.6812 },
-    fill: { red: 0.25, green: 0.5, blue: 0.25, alpha: 0.75 }
+    fill: { red: 0.5, green: 1.0, blue: 0.5, alpha: 0.75 }
   }
 ]
 const circleLayer = new GeoCircleLayer('example-circle', circleLayerParameters[0])
