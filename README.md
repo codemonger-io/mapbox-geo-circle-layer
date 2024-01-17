@@ -10,7 +10,7 @@ Renders a simple circle on a [Mapbox GL JS](https://docs.mapbox.com/mapbox-gl-js
 
 Please run the following command:
 ```sh
-npm install https://github.com/codemonger-io/mapbox-geo-circle-layer.git#v0.1.1
+npm install https://github.com/codemonger-io/mapbox-geo-circle-layer.git#v0.2.0
 ```
 
 ### Prerequisites
@@ -26,7 +26,7 @@ import { GeoCircleLayer } from 'mapbox-geo-circle-layer';
 map.addLayer(new GeoCircleLayer('example-circle', {
     radiusInMeters: 100,
     center: { lng: 139.7671, lat: 35.6812 },
-    fill: { red: 0.25, green: 0.25, blue: 0.5, alpha: 0.5 },
+    fill: { red: 0.5, green: 0.5, blue: 1, alpha: 0.5 },
 }));
 ```
 
