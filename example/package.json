@@ -1,6 +1,6 @@
 {
   "name": "example",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -13,7 +13,7 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
-    "mapbox-geo-circle-layer": "github:codemonger-io/mapbox-geo-circle-layer#v0.1.1",
+    "mapbox-geo-circle-layer": "github:codemonger-io/mapbox-geo-circle-layer#v0.2.0",
     "mapbox-gl": "^3.0.1",
     "vue": "^3.3.11"
   },
