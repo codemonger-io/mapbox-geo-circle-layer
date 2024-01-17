@@ -79,6 +79,8 @@ export class GeoCircleLayer implements CustomLayerInterface {
   private _center: LngLat;
   /** Fill color of the circle. */
   private _fill: RGBA;
+  /** Fill color for blending. Alpha is multiplied to the other components. */
+  private _fillForBlending: RGBA;
   /** Number of triangles to approximate the circle. */
   private _numTriangles: number;
 
@@ -111,7 +113,8 @@ export class GeoCircleLayer implements CustomLayerInterface {
    * - `fill`: `{ red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0 }` (white)
    * - `numTriangles`: `32`
    *
-   * Premultiply the alpha to the red, gree, and blue components of `fill`.
+   * Since v0.2.0, you no longer have to premultiply the alpha to the red,
+   * gree, and blue components of `fill`.
    *
    * @param id -
    *
@@ -145,6 +148,7 @@ export class GeoCircleLayer implements CustomLayerInterface {
     this._radiusInMeters = radiusInMeters;
     this._center = props?.center ?? DEFAULT_CENTER;
     this._fill = props?.fill ?? DEFAULT_FILL;
+    this._fillForBlending = multiplyAlpha(this._fill);
     this._numTriangles = numTriangles;
   }
 
@@ -195,7 +199,8 @@ export class GeoCircleLayer implements CustomLayerInterface {
    *
    * @remarks
    *
-   * Premultiply the alpha to the red, green, and blue components.
+   * Since v0.2.0, you no longer have to premultiply the alpha to the red,
+   * green, and blue components.
    *
    * Updating this property will trigger repaint of the map.
    */
@@ -204,6 +209,7 @@ export class GeoCircleLayer implements CustomLayerInterface {
   }
   set fill(fill: RGBA) {
     this._fill = fill;
+    this._fillForBlending = multiplyAlpha(fill);
     // no need to recalculate the circle
     this.map?.triggerRepaint();
   }
@@ -366,9 +372,10 @@ export class GeoCircleLayer implements CustomLayerInterface {
       false,
       matrix,
     );
+    const { red, green, blue, alpha } = this._fillForBlending;
     gl.uniform4fv(
       gl.getUniformLocation(program, 'u_fill'),
-      [this._fill.red, this._fill.green, this._fill.blue, this._fill.alpha],
+      [red, green, blue, alpha],
     );
     gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
     gl.enableVertexAttribArray(aPos);
@@ -377,4 +384,27 @@ export class GeoCircleLayer implements CustomLayerInterface {
     // gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
     gl.drawArrays(gl.TRIANGLE_FAN, 0, this._numTriangles + 2);
   }
+}
+
+/**
+ * Multiplies the alpha component to the other three components.
+ *
+ * @param color -
+ *
+ *   Color to multiply the alpha.
+ *
+ * @returns
+ *
+ *   New RGBA object that has the alpha multiplied to the other components of
+ *   `color`.
+ *   
+ * @beta
+ */
+export function multiplyAlpha({ red, green, blue, alpha }: RGBA): RGBA {
+  return {
+    red: red * alpha,
+    green: green * alpha,
+    blue: blue * alpha,
+    alpha,
+  };
 }
