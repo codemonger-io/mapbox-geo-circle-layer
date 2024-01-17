@@ -4,12 +4,12 @@
 
 ## DEFAULT\_NUM\_TRIANGLES variable
 
-> This API is provided as a preview for developers and may change based on feedback that we receive. Do not use this API in a production environment.
+> This API is provided as a beta preview for developers and may change based on feedback that we receive. Do not use this API in a production environment.
 > 
 
 Default number of triangles to approximate a circle.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 DEFAULT_NUM_TRIANGLES = 32

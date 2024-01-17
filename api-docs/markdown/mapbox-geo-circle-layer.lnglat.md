@@ -4,12 +4,12 @@
 
 ## LngLat interface
 
-> This API is provided as a preview for developers and may change based on feedback that we receive. Do not use this API in a production environment.
+> This API is provided as a beta preview for developers and may change based on feedback that we receive. Do not use this API in a production environment.
 > 
 
 Longitude and latitude.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface LngLat 
@@ -19,6 +19,6 @@ export interface LngLat
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [lat](./mapbox-geo-circle-layer.lnglat.lat.md) |  | number | <b><i>(BETA)</i></b> Latitude. |
-|  [lng](./mapbox-geo-circle-layer.lnglat.lng.md) |  | number | <b><i>(BETA)</i></b> Longitude. |
+|  [lat](./mapbox-geo-circle-layer.lnglat.lat.md) |  | number | **_(BETA)_** Latitude. |
+|  [lng](./mapbox-geo-circle-layer.lnglat.lng.md) |  | number | **_(BETA)_** Longitude. |
 

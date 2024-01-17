@@ -4,12 +4,12 @@
 
 ## GeoCircleLayerProperties interface
 
-> This API is provided as a preview for developers and may change based on feedback that we receive. Do not use this API in a production environment.
+> This API is provided as a beta preview for developers and may change based on feedback that we receive. Do not use this API in a production environment.
 > 
 
 Constructor properties for `GeoCircleLayer`<!-- -->.
 
-<b>Signature:</b>
+**Signature:**
 
 ```typescript
 export interface GeoCircleLayerProperties 
@@ -19,8 +19,8 @@ export interface GeoCircleLayerProperties
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [center?](./mapbox-geo-circle-layer.geocirclelayerproperties.center.md) |  | [LngLat](./mapbox-geo-circle-layer.lnglat.md) | <b><i>(BETA)</i></b> <i>(Optional)</i> Center of the circle. |
-|  [fill?](./mapbox-geo-circle-layer.geocirclelayerproperties.fill.md) |  | [RGBA](./mapbox-geo-circle-layer.rgba.md) | <b><i>(BETA)</i></b> <i>(Optional)</i> Fill color of the circle. |
-|  [numTriangles?](./mapbox-geo-circle-layer.geocirclelayerproperties.numtriangles.md) |  | number | <b><i>(BETA)</i></b> <i>(Optional)</i> Number of triangles to approximate the circle. |
-|  [radiusInMeters?](./mapbox-geo-circle-layer.geocirclelayerproperties.radiusinmeters.md) |  | number | <b><i>(BETA)</i></b> <i>(Optional)</i> Radius of the circle in meters. |
+|  [center?](./mapbox-geo-circle-layer.geocirclelayerproperties.center.md) |  | [LngLat](./mapbox-geo-circle-layer.lnglat.md) | **_(BETA)_** _(Optional)_ Center of the circle. |
+|  [fill?](./mapbox-geo-circle-layer.geocirclelayerproperties.fill.md) |  | [RGBA](./mapbox-geo-circle-layer.rgba.md) | **_(BETA)_** _(Optional)_ Fill color of the circle. |
+|  [numTriangles?](./mapbox-geo-circle-layer.geocirclelayerproperties.numtriangles.md) |  | number | **_(BETA)_** _(Optional)_ Number of triangles to approximate the circle. |
+|  [radiusInMeters?](./mapbox-geo-circle-layer.geocirclelayerproperties.radiusinmeters.md) |  | number | **_(BETA)_** _(Optional)_ Radius of the circle in meters. |
 

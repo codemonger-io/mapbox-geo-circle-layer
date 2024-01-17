@@ -14,22 +14,28 @@ A circle is represented with the center and radius in meters (not pixels).
 
 |  Class | Description |
 |  --- | --- |
-|  [GeoCircleLayer](./mapbox-geo-circle-layer.geocirclelayer.md) | <b><i>(BETA)</i></b> Custom layer that renders a simple circle. |
+|  [GeoCircleLayer](./mapbox-geo-circle-layer.geocirclelayer.md) | **_(BETA)_** Custom layer that renders a simple circle. |
+
+## Functions
+
+|  Function | Description |
+|  --- | --- |
+|  [multiplyAlpha({ red, green, blue, alpha })](./mapbox-geo-circle-layer.multiplyalpha.md) | **_(BETA)_** Multiplies the alpha component to the other three components. |
 
 ## Interfaces
 
 |  Interface | Description |
 |  --- | --- |
-|  [GeoCircleLayerProperties](./mapbox-geo-circle-layer.geocirclelayerproperties.md) | <b><i>(BETA)</i></b> Constructor properties for <code>GeoCircleLayer</code>. |
-|  [LngLat](./mapbox-geo-circle-layer.lnglat.md) | <b><i>(BETA)</i></b> Longitude and latitude. |
-|  [RGBA](./mapbox-geo-circle-layer.rgba.md) | <b><i>(BETA)</i></b> RGBA components. |
+|  [GeoCircleLayerProperties](./mapbox-geo-circle-layer.geocirclelayerproperties.md) | **_(BETA)_** Constructor properties for <code>GeoCircleLayer</code>. |
+|  [LngLat](./mapbox-geo-circle-layer.lnglat.md) | **_(BETA)_** Longitude and latitude. |
+|  [RGBA](./mapbox-geo-circle-layer.rgba.md) | **_(BETA)_** RGBA components. |
 
 ## Variables
 
 |  Variable | Description |
 |  --- | --- |
-|  [DEFAULT\_CENTER](./mapbox-geo-circle-layer.default_center.md) | <b><i>(BETA)</i></b> Default center of a circle (Tokyo Station). |
-|  [DEFAULT\_FILL](./mapbox-geo-circle-layer.default_fill.md) | <b><i>(BETA)</i></b> Default fill color of a circle (opaque white). |
-|  [DEFAULT\_NUM\_TRIANGLES](./mapbox-geo-circle-layer.default_num_triangles.md) | <b><i>(BETA)</i></b> Default number of triangles to approximate a circle. |
-|  [DEFAULT\_RADIUS\_IN\_METERS](./mapbox-geo-circle-layer.default_radius_in_meters.md) | <b><i>(BETA)</i></b> Default radius of a circle. |
+|  [DEFAULT\_CENTER](./mapbox-geo-circle-layer.default_center.md) | **_(BETA)_** Default center of a circle (Tokyo Station). |
+|  [DEFAULT\_FILL](./mapbox-geo-circle-layer.default_fill.md) | **_(BETA)_** Default fill color of a circle (opaque white). |
+|  [DEFAULT\_NUM\_TRIANGLES](./mapbox-geo-circle-layer.default_num_triangles.md) | **_(BETA)_** Default number of triangles to approximate a circle. |
+|  [DEFAULT\_RADIUS\_IN\_METERS](./mapbox-geo-circle-layer.default_radius_in_meters.md) | **_(BETA)_** Default radius of a circle. |
 
